@@ -34,3 +34,5 @@ class CentralWidget(QWidget):
         text = self.__line_edit.text()
 
         self.__text_browser.setText(text)
+
+        # Test
