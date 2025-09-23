@@ -12,14 +12,24 @@ class CentralWidget(QWidget):
         self.__push_button_text = QPushButton("set_text")
         self.__push_button_text.clicked.connect(self.set_text)
 
+        self.__push_button_clear = QPushButton("Text löschen")
+        self.__push_button_clear.clicked.connect(self.clear)
+
+        self.__push_button_backward = QPushButton("Zurück")
+        self.__push_button_backward.clicked.connect(self.backward)
+
         self.__line_edit = QLineEdit()
+
         self.__text_browser = QTextBrowser()
+        self.__text_browser.setUndoRedoEnabled(True)
 
         layout = QGridLayout()
         layout.addWidget(self.__line_edit, 0, 0, 1, 2)
         layout.addWidget(self.__push_button_append, 1, 0)
         layout.addWidget(self.__push_button_text, 1, 1)
-        layout.addWidget(self.__text_browser, 2, 0, 1, 2)
+        layout.addWidget(self.__push_button_clear, 2, 0)
+        layout.addWidget(self.__push_button_backward, 2, 1)
+        layout.addWidget(self.__text_browser, 3, 0, 1, 2)
 
         self.setLayout(layout)
 
@@ -35,4 +45,10 @@ class CentralWidget(QWidget):
 
         self.__text_browser.setText(text)
 
-        # Test
+    @pyqtSlot()
+    def clear(self):
+        self.__text_browser.clear()
+
+    @pyqtSlot()
+    def backward(self):
+        self.__text_browser.undo()
